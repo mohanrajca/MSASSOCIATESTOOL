@@ -282,7 +282,7 @@ export const SCHEDULE_GROUPS: ScheduleGroup[] = [
     section: SECTIONS.CURRENT_ASSETS,
     order: 250,
     hasNote: true,
-    keywords: [/advance to supplier/i, /advance to staff/i, /prepaid expense/i, /loans and advances/i, /tds receivable/i, /advance tax/i, /gst input/i, /input tax credit/i, /\bitc\b/i],
+    keywords: [/advance to supplier/i, /advance to staff/i, /prepaid expense/i, /loans and advances/i, /tds receivable/i, /\btcs\b/i, /advance tax/i, /gst input/i, /input tax credit/i, /\bitc\b/i],
   },
   {
     key: "other_current_assets",
@@ -346,7 +346,7 @@ export const SCHEDULE_GROUPS: ScheduleGroup[] = [
     section: SECTIONS.EXPENSES,
     order: 340,
     hasNote: true,
-    keywords: [/increase.*decrease.*stock/i, /change.*inventor/i, /stock adjustment/i],
+    keywords: [/increase.*decrease.*stock/i, /change.*inventor/i, /stock adjustment/i, /opening stock/i],
   },
   {
     key: "employee_benefits",

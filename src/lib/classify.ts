@@ -55,3 +55,19 @@ export function suggestFromTallyGroup(tallyGroup: string | undefined): string | 
   const key = tallyGroup.trim().toLowerCase();
   return TALLY_GROUP_MAP[key] ?? null;
 }
+
+/**
+ * Combined suggestion used by every import path. The ledger name is checked
+ * first since a specific keyword match (e.g. a ledger literally named
+ * "Reserves and Surplus") is more reliable than the coarse Tally group it
+ * happens to sit under; the Tally group is the fallback for ledgers whose
+ * name gives no hint at all (e.g. a customer/vendor name under "Sundry
+ * Creditors").
+ */
+export function suggestGroupKeyCombined(name: string, tallyGroup: string | undefined): string | null {
+  // A group can end up with no ledgers under it (e.g. "Cash-in-hand" with no
+  // sub-accounts created), in which case Tally reports its own balance as if
+  // it were a leaf - so also try matching the ledger's own name as a Tally
+  // group name before giving up.
+  return suggestGroupKey(name) ?? suggestFromTallyGroup(tallyGroup) ?? suggestFromTallyGroup(name);
+}

@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { LedgerRow } from "./types";
-import { suggestGroupKey, suggestFromTallyGroup } from "./classify";
+import { suggestGroupKeyCombined } from "./classify";
 
 const HEADER_ALIASES: Record<string, string[]> = {
   glCode: ["gl code", "code", "ledger code", "a/c code"],
@@ -93,7 +93,7 @@ export function parsePastedTB(text: string): ParseResult {
     const tallyGroup = colIndex.tallyGroup !== undefined ? cells[colIndex.tallyGroup] : undefined;
     const narration = colIndex.narration !== undefined ? cells[colIndex.narration] ?? "" : "";
 
-    const suggestedGroupKey = suggestFromTallyGroup(tallyGroup) ?? suggestGroupKey(name);
+    const suggestedGroupKey = suggestGroupKeyCombined(name, tallyGroup);
 
     rows.push({ glCode, name, cyDebit, cyCredit, pyDebit, pyCredit, tallyGroup, narration, suggestedGroupKey });
   }
